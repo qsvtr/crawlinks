@@ -91,6 +91,10 @@ const visitPage = (url, callback) => {
 };
 
 const end = () => {
+    const directory = './output/';
+    if (!fs.existsSync(directory)){
+        fs.mkdirSync(directory);
+    }
     const domain = new URL(pagesVisited['domain']);
     pagesVisited.links.statistics['nbInternalLinks'] = Object.keys(pagesVisited.links.internal).length;
     pagesVisited.links.statistics['nbExternalLinks'] = Object.keys(pagesVisited.links.external).length;

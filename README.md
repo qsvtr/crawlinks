@@ -5,3 +5,7 @@ cd crawlinks/
 npm install
 node index.js -h
 ```
+
+
+**TO DO:**
++ respect the robots.txt file

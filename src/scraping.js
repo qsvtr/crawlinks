@@ -47,25 +47,25 @@ const visitPage = (url, callback) => {
         wretch(url)
             .get()
             .notFound(error => {
-                if (config.output) {
+                if (config.verbose) {
                     console.error('>', url.href, chalk.red(error.response.status));
                 }
                 callback()
             })
             .unauthorized(error => {
-                if (config.output) {
+                if (config.verbose) {
                     console.error('>', url.href, chalk.red(error.response.status));
                 }
                 callback()
             })
             .internalError(error => {
-                if (config.output) {
+                if (config.verbose) {
                     console.error('>', url.href, chalk.red(error.response.status));
                 }
                 callback()
             })
             .text(html =>  {
-                if (config.output) {
+                if (config.verbose) {
                     console.log('>', url.href, chalk.blue(200));
                 }
                 pagesVisited.links.internal[url.href] = 200;
@@ -83,7 +83,7 @@ const visitPage = (url, callback) => {
             })
     } else {
         pagesVisited.links.external[url.href] = 200;
-        if (config.output) {
+        if (config.verbose) {
             console.log('>', url.href, chalk.blue(200));
         }
         callback();
@@ -98,7 +98,7 @@ const end = () => {
     const domain = new URL(pagesVisited['domain']);
     pagesVisited.links.statistics['nbInternalLinks'] = Object.keys(pagesVisited.links.internal).length;
     pagesVisited.links.statistics['nbExternalLinks'] = Object.keys(pagesVisited.links.external).length;
-    if (config.output) console.log(chalk.green('###############################################'));
+    if (config.verbose) console.log(chalk.green('###############################################'));
     console.log(chalk.green('Done with', pagesVisited.links.statistics['nbInternalLinks'], 'internal links and', pagesVisited.links.statistics['nbExternalLinks'], 'external links'));
     if (config.output && (pagesVisited.links.statistics['nbInternalLinks'] > 0 || pagesVisited.links.statistics['nbExternalLinks'] > 0)) {
         fs.writeFileSync('output/' + domain.host + '.json', JSON.stringify(pagesVisited, null, 1), 'utf-8');

@@ -8,4 +8,5 @@ node index.js -h
 
 
 **TO DO:**
++ verify www.domain.com and domain.com to avoid repetitons (?)
 + respect the robots.txt file

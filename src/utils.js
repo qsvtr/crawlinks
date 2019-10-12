@@ -48,6 +48,13 @@ const validUrl = (url) => {
   return !!pattern.test(url)
 };
 
+const stripTrailingSlash = (str) => {
+    if(str && str.substr(-1) === '/') {
+        return str.substr(0, str.length - 1);
+    }
+    return str;
+};
+
 const validBoolean = (boolean) => {
     return boolean === true || boolean === false;
 };
@@ -56,5 +63,6 @@ module.exports = {
     rewriteAllLinks: rewriteAllLinks,
     rewriteLink: rewriteLink,
     validUrl: validUrl,
+    stripTrailingSlash: stripTrailingSlash,
     validBoolean: validBoolean
 };

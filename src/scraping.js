@@ -25,7 +25,9 @@ const startCrawling = (url, verbose = true, output = true, maxNumberPages = 500)
 const crawl =() =>{
     const reachedMax = numPagesVisited >= config.max_pages_visit;
 
-    const nextPage = pagesToVisit.pop();
+    const page = pagesToVisit.pop();
+    const nextPage = Utils.stripTrailingSlash(page);
+
     if (nextPage in pagesVisited.links.internal || nextPage in pagesVisited.links.external) {
         crawl();
     } else if (nextPage) {
